@@ -34,6 +34,10 @@ $ b_n = 1/a integral_(-a)^(a) f(x) sin((n pi x)/a) dif x $
 
 > *Note:* As $a -> pi$, these formulas reduce to the standard definition.
 
+The complex coefficients $c_n$ are calculated as:
+
+$ c_n = 1/(2a) integral_(-a)^(a) f(x) e^(-(i n pi x)/a) dif x $
+
 
 == 2. Half-Range Expansions (Extensions)
 Often we are given a function only on the interval $[0, L]$ and asked to represent it as a Fourier series. We can "extend" the function to $[-L, L]$ in two specific ways to simplify the series.

@@ -56,8 +56,9 @@ $
 If you notice, we need to sample each $pi / Omega$ seconds, which is our period, so the reverse is
 the Nyquist rate
 
-== Proof idea
-Let's expand $hat(f)$ as a Fourier series on $[-Omega, Omega]$.
+== Proof idea (Need to know for exam)
+We know that $hat(f)$ is continuous on $[-Omega, Omega]$ by the definition of band limited. Let's
+expand $hat(f)$ as a Fourier series on $[-Omega, Omega]$ (since it's 0 outside of this anyways)
 
 $ hat(f)(lambda) = sum_(k = -infinity)^infinity c_k e^((i pi k lambda ) Omega) $
 $
@@ -75,11 +76,56 @@ $
 Let's plug this back in
 $
   hat(f)(lambda) = sum_(j = -infinity)^infinity (sqrt(2 pi)) / (2 Omega) f(-(j pi) / Omega)
-  e^((i pi j lambda ) Omega)
+  e^((i pi j lambda ) / Omega)
 $
 
-This converges uniformly since we said $hat(f)$ is piecewise smooth, continuous If we now take the
-F.T. of $f(t)$, and plug in what we found for $hat(f)$, we end up getting to the Shannon thing
+This converges uniformly since we said $hat(f)$ is piecewise smooth, continuous and it converges
+uniformly.
+
+Let's also change the summation index from $j$ to $j = -k$
+
+$
+  hat(f)(lambda) = sum_(j = -infinity)^infinity (sqrt(2 pi)) / (2 Omega) f((j pi) / Omega)
+  e^(-(i pi j lambda ) / Omega)
+$
+
+If we now take the I.F.T. of $f(t)$, and plug in what we found for $hat(f)$, we end up with the
+following:
+
+$
+  f(t) = 1 / sqrt(2 pi) integral_(- Omega)^(Omega) hat(f)(lambda) e^(i lambda t) dif lambda
+$
+
+If we plug in what we got for $hat(f)$
+
+$
+  f(t) = 1 / cancel(sqrt(2 pi)) integral_(- Omega)^(Omega) (sum_(j = -infinity)^infinity cancel(sqrt(2 pi)) / (2 Omega) f((j pi) / Omega)
+    e^(-(i pi j lambda ) / Omega)
+  )e^(i lambda t) dif lambda
+$
+
+Swapping around the sum and integral
+
+$
+  f(t) = sum_(j = -infinity)^infinity 1 / (2 Omega) f((j pi) / Omega)
+  integral_(- Omega)^(Omega)
+  e^(i lambda(t - (pi j)/ Omega)) dif lambda
+$
+
+The integral simplifies to
+$
+  integral_(- Omega)^(Omega)
+  e^(i lambda(t - (pi j)/ Omega)) dif lambda = 2 Omega sin(t Omega - j pi) / (t Omega - j pi)
+$
+
+If we plug things back in
+
+$
+  f(t) = sum_(j = -infinity)^infinity cancel(1 / (2 Omega)) f((j pi) / Omega)
+  (cancel(2 Omega) sin(t Omega - j pi) / (t Omega - j pi))
+$
+
+This brings us back to the Shannon thing.
 
 == What happens if you over/under sample?
 
