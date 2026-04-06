@@ -10,6 +10,7 @@
 #set text(font: "Latin Modern Roman", size: 11pt)
 #set math.equation(numbering: "(1)")
 #show link: underline
+#let phi = sym.phi.alt
 
 = Haar Scaling Function & MRA
 == Course: Math 414
@@ -23,6 +24,7 @@ still bad there).
 
 This is our first attempt to help solve that problem, we decompose our function into a collection of
 blocks. There are some properties here, but wavelets are more useful.
+
 
 == Scaling Function $phi$
 
@@ -47,7 +49,7 @@ The Haar scaling function defines subspaces $V_j subset L^2(RR)$ at different re
 
 - $V_0$: piecewise constant on $[k, k+1)$
   $ V_0 = "span"{phi(x - k) : k in ZZ} $
-- $V_j$: piecewise constant on $[2^(-j)k, 2^(-j)(k+1))$
+- $V_j$: piecewise constant on $[2^(-j)k, 2^(-j)(k+1))$. Basically it's constant on intervals of $2^(-j)$, so if $j = 2$, every $1/4$ may have a jump, but from $[0, 1/4)$ it must be constant
   $ V_j = "span"{phi(2^j x - k) : k in ZZ} $
 
 === Orthonormal Basis for $V_j$
@@ -56,6 +58,11 @@ $ phi_(j,k)(x) = 2^(j\/2) phi(2^j x - k) $
 
 === Nesting Property
 $ dots.c subset V_(-1) subset V_0 subset V_1 subset V_2 subset dots.c $
+
+=== Another Orthogonal property (see Haar wavelet for more info)
+A function in $V_1$ is orgthogonal to $V_0$ if and only if it is of the form
+
+$ sum_(k in ZZ) a_k psi(x - k) $
 
 == Projection onto $V_j$
 To approximate $f(x)$ at resolution $j$, project onto $V_j$:
