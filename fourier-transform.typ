@@ -1,4 +1,5 @@
 #import "@preview/marginalia:0.3.1" as marginalia: note, notefigure, wideblock
+#import "@preview/physica:0.9.8" as physica: evaluated
 #import "@preview/cetz:0.4.2": canvas, draw
 #import "@preview/cetz-plot:0.1.3": plot
 #show: marginalia.setup.with(
@@ -114,3 +115,56 @@ If we just change how it is multiplied, it becomes the form we see at the beginn
 + If $f(t) = 0$ for $t < 0$ (this is good for causal filters in the future) then the relationship
   between the Laplace transform $cal(L)[f]$ and the f.t. is:
   $ cal(F)[f (t)](lambda) = 1 / sqrt(2 pi) cal(L)[f](i lambda) $
+
+== Examples
+=== F.T. of $f(t) = e^(- |t|)$
+Setting up the equation for the F.T.
+
+$
+  hat(f)(lambda) &= 1 / sqrt(2pi) integral_(-infinity)^(infinity) e^(- |t|) e^(-i lambda t) dif t\
+  &= 1 / sqrt(2pi) [integral_(-infinity)^(0) e^(t) e^(-i lambda t) dif t + integral_(0)^(infinity) e^(-t) e^(-i lambda t) dif t ]\
+  &= 1 / sqrt(2pi) [integral_(-infinity)^(0) e^(t(1 - i lambda)) dif t + integral_(0)^(infinity) e^(-t(1 + i lambda)) dif t ]\
+  &= 1 / sqrt(2pi) [evaluated((e^t(1 - i lambda)) / (1 - i lambda))^0_(- infinity) - evaluated(e^(-t(1 + i lambda)) / (1 + i lambda))_0^infinity ]\
+$
+$
+  & = 1 / sqrt(2pi) [1 / (1 - i lambda) - 1 / (1 + i lambda)] \
+  & = 1 / sqrt(2pi) [2 / (1 + lambda^2)] \
+$
+
+
+=== Placheral's theorem
+$ h(t) = cases(1 &quad -pi <= t < pi, 0 &quad "otherwise.") $
+
+Recall that $hat(h)(lambda) = sqrt(2/pi) frac(sin(pi lambda), lambda)$. Use Plancheral's theorem to
+find
+$ integral_0^infinity frac(sin^2(x), x^2) d x. $
+
+We know that
+
+$ <f(x), f(x)> = integral_(- infinity)^(infinity) hat(f) hat(f) dif lambda $
+$
+  integral_(- infinity)^(infinity) h(t) h(t) dif t = integral_(- infinity)^(infinity) hat(h) hat(h) dif lambda
+$
+$
+  integral_(- pi)^(pi) 1 dif t = integral_(- infinity)^(infinity) (sqrt(2 / pi) sin(pi lambda) / lambda)^2 dif lambda
+$
+
+$
+  cancel(2) pi = cancel(2) / pi integral_(- infinity)^(infinity) (sin^2(pi lambda)) / (lambda^2) dif lambda
+$
+
+$
+  pi ^ 2 = integral_(- infinity)^(infinity) (sin^2(pi lambda)) / (lambda^2) dif lambda
+$
+
+$(sin^2 (x)) / (x^2)$ is even, so this means
+
+$
+  pi ^ 2 / 2 = integral_(0)^(infinity) (sin^2(pi lambda)) / (lambda^2) dif lambda
+$
+
+Let $x = pi lambda, dif x = pi dif lambda$
+
+$
+  pi / 2 = integral_(0)^(infinity) (sin^2(x)) / (x^2) dif lambda
+$

@@ -111,9 +111,42 @@ $
 $
 Now if we are smart, bright, brilliant, we realize we have finished the proof
 
-$ h(u) = integral_(-infinity)^(infinity) f(u - x)g(x) dif x $
+$ h(u) = integral_(-infinity)^(infinity) f(u - x)g(x) dif x = f*g $
 $ hat(f) hat(g) = 1/sqrt(2 pi) integral_(-infinity)^(infinity) h(u) e^(- i lambda u) dif u $
 
 Where did we start, where did we finish?
-$ hat(f) hat(g) = cal(F)[h](lambda) $
+$ hat(f) hat(g) = cal(F)[h](lambda) = cal(F)[f * g](lambda) $
 
+== Examples
+=== Simple Convolution
+
+Let $phi(x) = cases(1 quad 0 <= x < 1, 0 quad "otherwise")$. Find $(phi * phi)(x)$
+
+$ (phi * phi)(x) = integral_(- infinity)^(infinity) phi(x - t) phi(t) dif t $
+$ (phi * phi)(x) = integral_(0)^(1) phi(x - t) overbrace(cancel(phi(t)), 1) dif t $
+Let $u = x - t, dif u = - dif t, 1->x - 1, 0 -> x$
+$ (phi * phi)(x) = - integral_(x)^(x - 1) phi(u) dif u $
+$ (phi * phi)(x) = integral_(x - 1)^(x) phi(u) dif u $
+
+Let's look at the possible cases here. We know that to be defined $0 <= u <= 1$
+
+Since $phi(u) = 1$ only for $u in [0, 1]$, we check the overlap of $[x - 1, x]$ with $[0, 1]$:
+
++ *Case 1* ($x < 0$): No overlap on the left.
+  $(phi * phi)(x) = 0$
+
++ *Case 2* ($0 <= x < 1$): Partial overlap on the left ($0$ to $x$).
+  $(phi * phi)(x) = integral_(0)^(x) 1 dif u = x$
+
++ *Case 3* ($1 <= x < 2$): Partial overlap on the right ($x - 1$ to $1$).
+  $(phi * phi)(x) = integral_(x - 1)^(1) 1 dif u = 1 - (x - 1) = 2 - x$
+
++ *Case 4* ($x >= 2$): No overlap on the right.
+  $(phi * phi)(x) = 0$
+
+*Final Result:*
+$ (phi * phi)(x) = cases(
+  x       &quad 0 <= x < 1,
+  2 - x   &quad 1 <= x < 2,
+  0       &quad "otherwise"
+) $
