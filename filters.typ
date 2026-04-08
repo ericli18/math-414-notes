@@ -29,9 +29,14 @@ To be a _linear_ filter, it satisfies the following properties:
 + Additivity: $L[f + g] = L[f] + L[g]$
 + Homogeneity: $L[c f] = c L[f]$, where $c$ is a constant
 
-To be _time invariant_, the filter should basically line up the original filter.
+To be _time invariant_, the filter should basically line up the original filter. $L$ is time invariant if the time shifted signal $f(t - a)$ is transformed by $L$ into the time-shifted output signal $(L f)(t - a)$
 
 For notation, we can define $f_a(t) = f(t - a)$, $f_a$ is a time shift of $a$ units of signal $f$.
+
+Technically, this means that for any signal $f$ and $a in RR$,
+
+$ L[f_a](t) = (L[f])_a $
+
 
 == Properties
 

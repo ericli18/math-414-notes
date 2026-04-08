@@ -60,7 +60,7 @@ the Nyquist rate
 We know that $hat(f)$ is continuous on $[-Omega, Omega]$ by the definition of band limited. Let's
 expand $hat(f)$ as a Fourier series on $[-Omega, Omega]$ (since it's 0 outside of this anyways)
 
-$ hat(f)(lambda) = sum_(k = -infinity)^infinity c_k e^((i pi k lambda ) Omega) $
+$ hat(f)(lambda) = sum_(k = -infinity)^infinity c_k e^((i pi k lambda ) / Omega) $
 $
   c_k = 1 / (2 Omega) integral_(- Omega)^(Omega) hat(f)(lambda)e^(- (i pi k lambda )/ Omega) dif lambda
 $

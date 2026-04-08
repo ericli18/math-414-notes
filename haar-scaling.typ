@@ -53,8 +53,8 @@ The Haar scaling function defines subspaces $V_j subset L^2(RR)$ at different re
   $ V_j = "span"{phi(2^j x - k) : k in ZZ} $
 
 === Orthonormal Basis for $V_j$
-To normalize the basis in $L^2$, we scale by $2^(j\/2)$:
-$ phi_(j,k)(x) = 2^(j\/2) phi(2^j x - k) $
+To normalize the basis in $L^2$, we scale by $2^(j/2)$:
+$ phi_(j,k)(x) = 2^(j/2) phi(2^j x - k) $
 
 === Nesting Property
 $ dots.c subset V_(-1) subset V_0 subset V_1 subset V_2 subset dots.c $

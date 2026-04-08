@@ -171,4 +171,49 @@ But we also know from before that $f_1 = f_0 + w_0$
 
 $ f_1(x) = sum_(k in ZZ) a_k^0 phi(x - k) sum_(k in ZZ) b_k^0 psi(x - k) $<og_formula>
 
-The coefficients from @decomposed and @og_formula are the same, and we get to the decomposition formula above.
+The coefficients from @decomposed and @og_formula are the same, and we get to the decomposition
+formula above.
+
+== Example
+
+Suppose we have a signal $f_2 in V_2$ represented by four scaling coefficients at level $j=2$:
+$a^2 = (a_0^2, a_1^2, a_2^2, a_3^2) = [4, 2, 8, 6]$
+
+This means our original sampled function can be written as:
+$f_2(x) = 4 phi(4x) + 2 phi(4x - 1) + 8 phi(4x - 2) + 6 phi(4x - 3)$
+
+=== 1. Decomposition ($V_2 arrow V_1 arrow V_0$)
+We use the Haar decomposition formulas $a_k^(j-1) = 1 / 2(a_(2k)^j + a_(2k+1)^j)$ and
+$b_k^(j-1) = 1 / 2(a_(2k)^j - a_(2k+1)^j)$.
+
+*Step 1: Down to $V_1$*
+$a_0^1 = 1 / 2 (a_0^2 + a_1^2) = 1 / 2 (4 + 2) = 3$$
+  b_0^1 = 1 / 2 (a_0^2 - a_1^2) = 1 / 2 (4 - 2) = 1
+$
+$a_1^1 = 1 / 2 (a_2^2 + a_3^2) = 1 / 2 (8 + 6) = 7$$
+  b_1^1 = 1 / 2 (a_2^2 - a_3^2) = 1 / 2 (8 - 6) = 1
+$
+At level $V_1$, our scaling coefficients are $a^1 = (3, 7)$ and our detail (wavelet) coefficients
+are $b^1 = (1, 1)$.
+
+*Step 2: Down to $V_0$*
+$a_0^0 = 1 / 2 (a_0^1 + a_1^1) = 1 / 2 (3 + 7) = 5$$
+  b_0^0 = 1 / 2 (a_0^1 - a_1^1) = 1 / 2 (3 - 7) = -2
+$
+
+Our fully decomposed signal is now represented by the coarsest average $a_0^0 = 5$ and the layered
+detail coefficients $b_0^0 = -2$ and $b^1 = (1, 1)$.
+
+=== 2. Reconstruction ($V_0 arrow V_1 arrow V_2$)
+Now, let's reverse the process to retrieve our original signal using the Haar reconstruction
+formulas $a_(2k)^j = a_k^(j-1) + b_k^(j-1)$ and $a_(2k+1)^j = a_k^(j-1) - b_k^(j-1)$.
+
+*Step 1: Up to $V_1$*
+$a_0^1 = a_0^0 + b_0^0 = 5 + (-2) = 3$$ a_1^1 = a_0^0 - b_0^0 = 5 - (-2) = 7 $
+We have perfectly recovered $a^1 = (3, 7)$ using our $V_0$ components.
+
+*Step 2: Up to $V_2$*
+$a_0^2 = a_0^1 + b_0^1 = 3 + 1 = 4$$ a_1^2 = a_0^1 - b_0^1 = 3 - 1 = 2 $
+$a_2^2 = a_1^1 + b_1^1 = 7 + 1 = 8$$ a_3^2 = a_1^1 - b_1^1 = 7 - 1 = 6 $
+We have successfully reconstructed our original signal coefficients $a^2 = (4, 2, 8, 6)$!
+
